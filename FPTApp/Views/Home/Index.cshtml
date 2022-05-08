@@ -1,0 +1,134 @@
+﻿@model List<FPTApp.Models.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Share/_Layout1.cshtml";
+}
+
+<div class="banner-area banner-res-large pt-30 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div style="display: flex" class="single-banner mb-30">
+                    <div class="banner-img">
+                        <a href="#">
+                            <i style="width: 32px; height: 26px; font-size: 26px; color: #ada8a8de" class="fa-solid fa-truck"></i>
+                        </a>
+                    </div>
+                    <div class="banner-text">
+                        <h4>Free shipping item</h4>
+                        <p>For all orders over $500</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div  style="display: flex" class="single-banner mb-30">
+                    <div class="banner-img">
+                        <a href="#">
+                            <i style="width: 32px; height: 26px; font-size: 26px; color: #ada8a8de" class="fa-solid fa-calendar-days"></i>
+                        </a>
+                    </div>
+                    <div class="banner-text">
+                        <h4>Money back guarantee</h4>
+                        <p>100% money back guarante</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div  style="display: flex" class="single-banner mb-30">
+                    <div class="banner-img">
+                        <a href="#">
+                            <i style="width: 32px; height: 26px; font-size: 26px; color: #ada8a8de" class="fa-solid fa-wallet"></i>
+                        </a>
+                    </div>
+                    <div class="banner-text">
+                        <h4>Cash on delivery</h4>
+                        <p>Lorem ipsum dolor consecte</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div  style="display: flex" class="single-banner mb-30">
+                    <div class="banner-img">
+                        <a href="#">
+                            <i style="width: 32px; height: 26px; font-size: 26px; color: #ada8a8de" class="fa-solid fa-phone"></i>
+                        </a>
+                    </div>
+                    <div class="banner-text">
+                        <h4>Help & Support</h4>
+                        <p>Call us : + 0123.4567.89</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"></div>
+
+<section class="suggested-books">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center py-5 ">
+                <h1 class="text-secondary text-uppercase font-italic common-title">
+                    Suggested Books
+                </h1>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-lg-6 col-md-8 col-sm-10 mx-auto books">
+                <a href=""><img src="~/Publish/Images/book1.jpg" alt="" class="img-fluid book book-1"></a>
+                <a href=""><img src="~/Publish/Images/book2.jpg" alt="" class="img-fluid book book-2"></a>
+                <a href=""><img src="~/Publish/Images/book3.jpg" alt="" class="img-fluid book book-3"></a>
+                <a href=""><img src="~/Publish/Images/book4.jpg" alt="" class="img-fluid book book-4"></a>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="popular-books p-5">
+    <div class="video-container">
+        <video src="~/Publish/Images/Lulu_latte.mp4" class="bg-video" autoplay muted loop type="video/mp4"></video>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center py-5 ">
+                <h1 class="text-secondary text-uppercase font-italic common-title">
+                    The most popular books of week
+                </h1>
+            </div>
+        </div>
+        <div class="row justify-content-around align-items-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-sm-8 rotate ">
+                    <div class="card text-center mb-5 book-card mx-md-auto">
+                        <div class="card-header">
+                            <h4 class="font-wright-light">@item.BookName</h4>
+                        </div>
+                        <div class="card-body">
+                            <img src="@Url.Content(@item.ImagePath)" alt="" class="img-fluid rounded">
+                        </div>
+                        
+                        <div class="back">
+                            <div class="back-content">
+                                <h1 class="text-uppercase font-weight-light font-italic">only for</h1>
+                                <h3 class="mb-3">@item.BookPrice.ToString("#,##0.00 USD")</h3>
+                                <a href="/ShoppingCart/AddToCart/@item.BookID" class="btn btn-outline-danger px-4 mb-3">Add to cart </a>
+                                <a href="/Home/Details/@item.BookID" class="btn btn-outline-danger px-4 mb-3">View detail </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+
+</section>
+

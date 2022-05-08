@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=1" name="viewport" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b43c192976.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="~/Publish/CSS/Layout.css" rel="stylesheet" />
+    <script src="~/Publish/Javascript/JavascriptFPT.js"></script>
+ 
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .btn {
+            background-color: #f07c29;
+            margin-top: 22px;
+            margin-bottom: 22px;
+        }
+
+        .popular-books {
+            position: relative;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            opacity: .4;
+        }
+
+        .bg-video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .book-card {
+            position: relative;
+            box-shadow: 5px 15px 50px #aaa;
+            max-width: 420px;
+            overflow: hidden;
+            transition: all .8s;
+        }
+
+        .back {
+            position: absolute;
+            top: -100%;
+            background: #fafafa;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            user-select: none;
+            pointer-events: none;
+            transform: rotateY(180deg);
+            transition: top .8s;
+        }
+
+        .rotate {
+            perspective: 100rem;
+        }
+
+        .back-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .rotate:hover .book-card {
+            transform: rotateY(180deg);
+        }
+
+        .rotate:hover .back {
+            top: 0;
+            opacity: 1;
+            user-select: auto;
+            pointer-events: auto;
+        }
+
+        .product-info-main .page-title h1 {
+            color: #333333;
+            font-size: 36px;
+            font-weight: 400;
+            margin: 0 0 9px;
+            padding: 0;
+            text-transform: capitalize;
+            font-family: 'Rufina', serif;
+            font-weight: 400;
+        }
+
+        
+        .product-info-stock-sku > span {
+            color: #333;
+            font-size: 14px;
+            font-weight: 400;
+            margin-right: 15px;
+            text-transform: capitalize;
+            font-family: 'Rufina', serif;
+            font-weight: 400;
+            float: left;
+            display: inline-block;
+        }
+
+        .product-attribute span {
+            color: #333;
+            font-size: 14px;
+            line-height: 20px;
+            padding-right: 10px;
+            text-transform: uppercase;
+        }
+
+        .product-reviews-summary {
+            border-bottom: 1px solid #e5e5e5;
+            border-top: 1px solid #e5e5e5;
+            display: block;
+            margin: 20px 0 0;
+            padding: 14px 0 12px;
+            overflow: hidden;
+        }
+
+
+        element.style {
+        }
+
+        .product-info-price {
+            margin: 26px 0;
+            overflow: hidden;
+        }
+
+        .product-info-price .price-final {
+            color: #f07c29;
+            font-size: 25px;
+            font-weight: 400;
+            font-family: 'Rufina', serif;
+            font-weight: 400;
+        }
+
+
+        .product-add-form {
+            clear: both;
+            margin: 30px 0 20px;
+            overflow: hidden;
+        }
+
+        .rating-summary > a {
+            color: #F07C29;
+        }
+
+        .product-add-form form .quality-button input {
+            background: #333 none repeat scroll 0 0;
+            border: 0 none;
+            color: #fff;
+            font-size: 14px;
+            height: 50px;
+            margin: 0;
+            text-align: center;
+            width: 70px;
+            padding: 0 10px;
+        }
+        .product-add-form form a {
+            background: #333 none repeat scroll 0 0;
+            border: 0 none;
+            border-radius: 0;
+            color: #fff;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 700;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 28px;
+            text-transform: uppercase;
+            width: auto;
+            transition: .3s;
+        }
+
+        .product-addto-links a {
+            background: #000 none repeat scroll 0 0;
+            color: #fff;
+            display: inline-block;
+            font-size: 19px;
+            font-weight: 700;
+            height: 45px;
+            line-height: 45px;
+            margin-right: 5px;
+            padding: 0;
+            text-align: center;
+            text-decoration: none;
+            width: 50px;
+            transition: .3s;
+        }
+        table {
+            border-spacing: 0px;
+            width: 100%;
+        }
+
+        .table td, .table th {
+            padding: .75em;
+            vertical-align: top;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .table tr:hover {
+            background: linear-gradient(90deg, rgba(182,134,211,1) 0%, rgba(246,33,33,1) 34%, rgba(248,249,82,1) 95%);
+        }
+
+       .table tr:hover td > a {
+           box-shadow: none;
+       }
+
+        .table .thead-dark th {
+            color: #333333;
+            background-color: var(--dark);
+            border-color: #32383e;
+        }
+
+        tfoot tr:hover {
+            background-color: none;
+        }
+
+        .product-add-form a:hover{
+            opacity: 0.7;
+        }
+
+    </style>
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="language-area">
+                        <ul>
+                            <li>
+
+                                <img style="width: 18px; height: 12px" src="~/Publish/Images/UK_flag.png" /><a href="#">English<i class="fa fa-angle-down"></i></a>
+
+                            </li>
+                            <li>
+                                <a href="#">USD $<i class="fa fa-angle-down"></i></a>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="account-area text-right">
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Register</a></li>
+                            <li><a href="#">Sign in</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-mid-area ptb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5 col-12">
+                    <div class="header-search">
+                        
+                            <form>
+                                <input type="text" placeholder="Search entire store here..." />
+                                <a href="#"><i class="fa fa-search"></i></a>
+                            </form>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4 col-12">
+                    <div class="logo-area text-center logo-xs-mrg">
+                        <a href="#">
+                            <img style="width: 223px; height: 56px" src="~/Publish/Images/FPTLogo.png" />
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-12">
+                    <div class="my-cart">
+                        <ul>
+                            <li>
+                                <a href="/ShoppingCart/ShowToCart"><i class="fa fa-shopping-cart"></i>My Cart</a>
+                                @Html.Action("BagCart", "ShoppingCart")
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-menu-area d-md-none d-none d-lg-block sticky-header-1" id="header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="menu-area">
+                        <nav>
+                            <ul>
+                                <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                <li><a href="#">Book</a></li>
+                                <li><a href="#>Audio books</a></li>
+                                <li><a href="#">children’s books</a></li>
+                                <li><a href="#">blog</a></li>
+                                <li> <a href="#">pages</a></li>
+                                <li> <a href="#">sales off</li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+
+
+   
+
+</body>
+</html>

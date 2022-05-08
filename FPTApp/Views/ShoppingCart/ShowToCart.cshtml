@@ -1,0 +1,76 @@
+﻿@model FPTApp.Models.ShoppingCart
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Share/_Layout1.cshtml";
+}
+
+
+
+@if(Model != null) 
+{ 
+<div style="margin-top: 50px" class="container">
+    <a>
+        <table class="table">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th>Book Name</th>
+                    <th>Book Image</th>
+                    <th>Book Price</th>
+                    <th>Quantity</th>
+                    <th>Total Amount</th>
+                    <th>Delete</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Items)
+                {
+                    decimal total = item.product.BookPrice * item.Quantity;
+                    <tr>
+                        <td>@Html.DisplayFor(model => item.product.BookName)</td>
+                        <td><img style="width:120px; height :155px" src="@Url.Content(item.product.ImagePath)"></td>
+                        <td>@Html.DisplayFor(model => item.product.BookPrice)</td>
+                        <td>
+                            @using (Html.BeginForm("UpdateQuantity", "ShoppingCart"))
+                            {
+                                <input type="hidden" value="@item.product.BookID" name="ID Book" />
+                                <input type="number" value="@item.Quantity" name="Quantity" />
+                                <input type="submit" value="Update Quantity" />
+
+                            }
+
+                        </td>
+                        <td>@total</td>
+                        <td>
+                            <a href="/ShoppingCart/RemoveCart/@item.product.BookID">Remove</a>
+                        </td>
+
+
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+            <tfoot>
+                
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="5" style="font-weight: bold;">Sum Total: @Model.TotalMoney()</td>
+                </tr>
+            </tfoot>
+        </table>
+    </a>
+  
+
+    <a href="@Url.Action("Index", "Home")" style="padding-bottom:100px;">Continue to Shopping</a>
+
+</div>
+}
